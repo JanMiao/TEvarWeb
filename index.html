@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>转座子数据库展示</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --accent: #38bdf8;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --chip: #1f2937;
+      --success: #22c55e;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Inter", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(1200px 800px at 10% -10%, #1e293b 0, #0f172a 40%, #0b1120 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      padding: 32px 24px 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      letter-spacing: 0.5px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .stat {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 14px 16px;
+      backdrop-filter: blur(6px);
+    }
+    .stat .label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .stat .value {
+      font-size: 20px;
+      margin-top: 4px;
+    }
+    .controls {
+      max-width: 1200px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .search,
+    .filter {
+      background: var(--card);
+      border: 1px solid #1f2937;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 14px;
+      min-width: 220px;
+    }
+    .grid {
+      max-width: 1200px;
+      margin: 20px auto 40px;
+      padding: 0 24px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .card {
+      background: linear-gradient(160deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.7));
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.3);
+    }
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      color: #e5f3ff;
+    }
+    .chip {
+      display: inline-block;
+      padding: 4px 8px;
+      background: var(--chip);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-right: 6px;
+    }
+    .meta {
+      margin: 10px 0 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .badge {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #0b1120;
+      font-weight: 600;
+    }
+    .badge.low {
+      background: var(--success);
+    }
+    .badge.mid {
+      background: var(--warn);
+    }
+    .badge.high {
+      background: var(--danger);
+    }
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>转座子数据库（示例）</h1>
+    <div class="subtitle">随机示例数据，用于展示转座子信息：位置、名称、家族、相关疾病等。</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">总记录数</div>
+        <div class="value">8</div>
+      </div>
+      <div class="stat">
+        <div class="label">涉及疾病</div>
+        <div class="value">12</div>
+      </div>
+      <div class="stat">
+        <div class="label">物种</div>
+        <div class="value">Homo sapiens</div>
+      </div>
+      <div class="stat">
+        <div class="label">更新日期</div>
+        <div class="value">2025-02-14</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <input class="search" placeholder="搜索转座子名称/家族/疾病…" />
+    <select class="filter">
+      <option>全部家族</option>
+      <option>LINE</option>
+      <option>SINE</option>
+      <option>LTR</option>
+      <option>DNA Transposon</option>
+    </select>
+  </div>
+
+  <section class="grid">
+    <article class="card">
+      <h3>LINE-1 (L1HS)</h3>
+      <div class="meta">位置：chr7: 92,114,233–92,123,109（GRCh38）</div>
+      <div class="meta">家族：LINE · 活性等级：<span class="badge high">高</span></div>
+      <div class="meta">相关疾病：结直肠癌、乳腺癌、卵巢癌</div>
+      <div class="chip">突变驱动</div><div class="chip">体细胞插入</div>
+    </article>
+
+    <article class="card">
+      <h3>AluY</h3>
+      <div class="meta">位置：chr1: 145,803,910–145,804,215</div>
+      <div class="meta">家族：SINE · 活性等级：<span class="badge mid">中</span></div>
+      <div class="meta">相关疾病：神经退行性疾病、自身免疫</div>
+      <div class="chip">短散在重复</div><div class="chip">高拷贝</div>
+    </article>
+
+    <article class="card">
+      <h3>ERVK-9</h3>
+      <div class="meta">位置：chr5: 43,221,040–43,236,188</div>
+      <div class="meta">家族：LTR · 活性等级：<span class="badge mid">中</span></div>
+      <div class="meta">相关疾病：胚胎发育异常、炎症</div>
+      <div class="chip">内源性逆转录病毒</div>
+    </article>
+
+    <article class="card">
+      <h3>MER20</h3>
+      <div class="meta">位置：chr12: 101,901,552–101,903,021</div>
+      <div class="meta">家族：DNA Transposon · 活性等级：<span class="badge low">低</span></div>
+      <div class="meta">相关疾病：子宫内膜异常、胎盘相关</div>
+      <div class="chip">调控元件</div><div class="chip">增强子</div>
+    </article>
+
+    <article class="card">
+      <h3>SVA_F</h3>
+      <div class="meta">位置：chrX: 12,843,109–12,850,955</div>
+      <div class="meta">家族：Composite · 活性等级：<span class="badge high">高</span></div>
+      <div class="meta">相关疾病：神经发育障碍、肌萎缩侧索硬化</div>
+      <div class="chip">复合转座子</div>
+    </article>
+
+    <article class="card">
+      <h3>HERV-W</h3>
+      <div class="meta">位置：chr3: 151,220,042–151,234,400</div>
+      <div class="meta">家族：LTR · 活性等级：<span class="badge low">低</span></div>
+      <div class="meta">相关疾病：多发性硬化、精神分裂</div>
+      <div class="chip">免疫调控</div>
+    </article>
+
+    <article class="card">
+      <h3>LINE-2 (L2)</h3>
+      <div class="meta">位置：chr8: 78,330,199–78,335,606</div>
+      <div class="meta">家族：LINE · 活性等级：<span class="badge low">低</span></div>
+      <div class="meta">相关疾病：慢性炎症、代谢综合征</div>
+      <div class="chip">古老家族</div>
+    </article>
+
+    <article class="card">
+      <h3>MITEs-TA</h3>
+      <div class="meta">位置：chr16: 5,810,221–5,812,430</div>
+      <div class="meta">家族：DNA Transposon · 活性等级：<span class="badge mid">中</span></div>
+      <div class="meta">相关疾病：肿瘤易感、发育异常</div>
+      <div class="chip">微型元素</div>
+    </article>
+  </section>
+
+  <footer>
+    说明：以上为随机示例数据，仅用于展示页面结构与视觉设计。
+  </footer>
+</body>
+</html>
